@@ -29,24 +29,27 @@ public class FileOrderRepository
 
         // Format: id,productId:qty|productId:qty,total
         String[] parts = line.split(",");
+        if (parts.length < 3) {
+            return new Order(0, null, 0.0);
+        }else{
+            int id = Integer.parseInt(parts[0]);
 
-        int id = Integer.parseInt(parts[0]);
+            List<OrderItem> items = new ArrayList<>();
+            String[] products = parts[1].split("\\|");
 
-        List<OrderItem> items = new ArrayList<>();
-        String[] products = parts[1].split("\\|");
+            for (String product : products) {
+                String[] prodParts = product.split(":");
 
-        for (String product : products) {
-            String[] prodParts = product.split(":");
+                int productId = Integer.parseInt(prodParts[0]);
+                int quantity = Integer.parseInt(prodParts[1]);
 
-            int productId = Integer.parseInt(prodParts[0]);
-            int quantity = Integer.parseInt(prodParts[1]);
+                items.add(new OrderItem(productRepository.findOne(productId), quantity));
+            }
 
-            items.add(new OrderItem(productRepository.findOne(productId), quantity));
+            double totalPrice = Double.parseDouble(parts[2]);
+
+            return new Order(id, items, totalPrice);
         }
-
-        double totalPrice = Double.parseDouble(parts[2]);
-
-        return new Order(id, items, totalPrice);
     }
 
     @Override

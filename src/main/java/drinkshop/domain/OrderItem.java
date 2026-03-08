@@ -1,6 +1,7 @@
 package drinkshop.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 public class OrderItem implements Serializable {
 

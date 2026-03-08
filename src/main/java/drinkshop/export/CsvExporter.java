@@ -13,21 +13,30 @@ import java.util.List;
 public class CsvExporter {
     public static void exportOrders(List<Product> products, List<Order> orders, String path) {
         try (FileWriter w = new FileWriter(path)) {
-            w.write("OrderId,Product,Quantity,Price\n");
-            double sum=0.0;
-            for (Order o : orders){
+            // Header-ul CSV-ului cu câmpuri text protejate
+            w.write("\"OrderId\",\"Product\",\"Quantity\",\"Price\"\n");
+
+            double sum = 0.0;
+            for (Order o : orders) {
                 for (OrderItem i : o.getItems()) {
-                    Product p = products.stream().filter(p1->i.getProduct().getId()==p1.getId()).toList().get(0);
-                    w.write(o.getId() + "," + p.getNume() + "," + i.getQuantity() + "," + i.getTotal() + "\n");
+                    Product p = products.stream().filter(p1 -> i.getProduct().getId() == p1.getId()).toList().get(0);
+
+                    // Corecție C07: Încadrarea textului (nume produs) între ghilimele
+                    w.write(o.getId() + ",\"" + p.getNume() + "\"," + i.getQuantity() + "," + i.getTotal() + "\n");
                 }
-                w.write("total order: "+o.getTotal()+" RON\n");
-                w.write("-------------------------------\n");
-                sum+=o.getTotal();
+
+                // Formatare consecventă pentru rândurile de sumar
+                w.write("\"total order: " + o.getTotal() + " RON\"\n");
+                w.write("\"-------------------------------\"\n");
+                sum += o.getTotal();
             }
+
             String date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-            w.write("TOTAL OF "+date+" is: "+sum+" RON\n");
+            // Protejăm și mesajul final de sumar
+            w.write("\"TOTAL OF " + date + " is: " + sum + " RON\"\n");
+
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Eroare la procesarea ieșirii (C07): " + e.getMessage(), e);
         }
     }
 }
