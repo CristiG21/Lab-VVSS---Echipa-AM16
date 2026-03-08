@@ -56,7 +56,7 @@ public class FileOrderRepository
 
         for (OrderItem item : entity.getItems()) {
 
-            if (sb.length() > 0) {
+            if (sb.isEmpty()) {
                 sb.append("|");
             }
 
