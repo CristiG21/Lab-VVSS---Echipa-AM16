@@ -5,6 +5,7 @@ import drinkshop.export.CsvExporter;
 import drinkshop.receipt.ReceiptGenerator;
 import drinkshop.reports.DailyReportService;
 import drinkshop.repository.Repository;
+import drinkshop.service.validator.ValidationException;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class DrinkShopService {
             Repository<Integer, Stoc> stocService
     ) {
         this.productService = new ProductService(productRepo);
-        this.orderService = new OrderService(orderRepo, productRepo);
+        this.orderService = new OrderService(orderRepo, productRepo, retetaRepo);
         this.retetaService = new RetetaService(retetaRepo);
         this.stocService = new StocService(stocService);
         this.report = new DailyReportService(orderRepo);
@@ -35,6 +36,7 @@ public class DrinkShopService {
     }
 
     public void updateProduct(int id, String name, double price, CategorieBautura categorie, TipBautura tip) {
+        if (price <= 0) throw new ValidationException("Prețul trebuie să fie pozitiv");
         productService.updateProduct(id, name, price, categorie, tip);
     }
 
@@ -55,8 +57,8 @@ public class DrinkShopService {
     }
 
     // ---------- ORDER ----------
-    public void addOrder(Order o) {
-        orderService.addOrder(o);
+    public void addOrder(Order o) throws Exception {
+        orderService.addOrder(o, stocService);
     }
 
     public List<Order> getAllOrders() {

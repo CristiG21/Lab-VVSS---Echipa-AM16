@@ -18,13 +18,16 @@ public class FileStocRepository
     @Override
     protected Stoc extractEntity(String line) {
         String[] elems = line.split(";");
+        if (elems.length < 4) {
+            return new Stoc(0, "", 0, 0);
+        }else {
+            int id = Integer.parseInt(elems[0]);
+            String ingredient = elems[1];
+            int cantitate = Integer.parseInt(elems[2]);
+            int stocMinim = Integer.parseInt(elems[3]);
 
-        int id = Integer.parseInt(elems[0]);
-        String ingredient = elems[1];
-        int cantitate = Integer.parseInt(elems[2]);
-        int stocMinim = Integer.parseInt(elems[3]);
-
-        return new Stoc(id, ingredient, cantitate, stocMinim);
+            return new Stoc(id, ingredient, cantitate, stocMinim);
+        }
     }
 
     @Override
