@@ -1,0 +1,122 @@
+@startuml
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+package "drinkshop.domain" {
+  enum CategorieBautura <<enumeration>>
+  class IngredientReteta
+  class Order
+  class OrderItem
+  class Product
+  class Reteta
+  class Stoc
+  enum TipBautura <<enumeration>>
+}
+
+package "drinkshop.repository" {
+  interface Repository<ID, E> <<interface>>
+  abstract class AbstractRepository<ID, E>
+  package "file" {
+    abstract class FileAbstractRepository<ID, E>
+    class FileOrderRepository
+    class FileProductRepository
+    class FileRetetaRepository
+    class FileStocRepository
+  }
+}
+
+package "drinkshop.service" {
+  class DrinkShopService
+  class OrderService
+  class ProductService
+  class RetetaService
+  class StocService
+
+  package "validator" {
+    interface Validator<T> <<interface>>
+    class OrderItemValidator
+    class OrderValidator
+    class ProductValidator
+    class RetetaValidator
+    class StocValidator
+    class ValidationException
+  }
+}
+
+package "drinkshop.ui" {
+  class DrinkShopApp
+  class DrinkShopController
+}
+
+package "drinkshop.reports" {
+  class DailyReportService
+}
+
+package "drinkshop.export" {
+  class CsvExporter
+}
+
+package "drinkshop.receipt" {
+  class ReceiptGenerator
+}
+
+' repository hierarchy
+AbstractRepository -[#008200,dashed]-^ Repository
+FileAbstractRepository -[#000082,plain]-^ AbstractRepository
+FileOrderRepository -[#000082,plain]-^ FileAbstractRepository
+FileProductRepository -[#000082,plain]-^ FileAbstractRepository
+FileRetetaRepository -[#000082,plain]-^ FileAbstractRepository
+FileStocRepository -[#000082,plain]-^ FileAbstractRepository
+
+' domain relations
+Order "1" *-[#595959,plain]-> "*" OrderItem : items
+OrderItem "*"-[#595959,plain]-> "1" Product : product
+Reteta "1" *-[#595959,plain]-> "*" IngredientReteta : ingrediente
+Product "1" *-[#595959,plain]-> "1" CategorieBautura : categorie
+Product "1" *-[#595959,plain]-> "1" TipBautura : tip
+Product "1" -[#595959,plain]-> "0..1" Reteta : reteta
+
+' ui / app relations
+DrinkShopController "1" *-[#595959,plain]-> "1" DrinkShopService : service
+DrinkShopController "1" *-[#595959,plain]-> "*" IngredientReteta : newRetetaList
+DrinkShopController "1" *-[#595959,plain]-> "1" Order : currentOrder
+DrinkShopController "1" *-[#595959,plain]-> "*" OrderItem : currentOrderItems
+DrinkShopController "1" *-[#595959,plain]-> "*" Product : productList
+DrinkShopController "1" *-[#595959,plain]-> "*" Reteta : retetaList
+
+DrinkShopApp ..> FileProductRepository : creates
+DrinkShopApp ..> FileOrderRepository : creates
+DrinkShopApp ..> FileRetetaRepository : creates
+DrinkShopApp ..> FileStocRepository : creates
+DrinkShopApp ..> DrinkShopService : creates
+DrinkShopApp ..> DrinkShopController : injects service
+
+' service relations
+DrinkShopService "1" *-[#595959,plain]-> "1" DailyReportService : report
+DrinkShopService "1" *-[#595959,plain]-> "1" OrderService : orderService
+DrinkShopService "1" *-[#595959,plain]-> "1" ProductService : productService
+DrinkShopService "1" *-[#595959,plain]-> "1" RetetaService : retetaService
+DrinkShopService "1" *-[#595959,plain]-> "1" StocService : stocService
+DrinkShopService ..> CsvExporter : uses
+DrinkShopService ..> ReceiptGenerator : uses
+
+DailyReportService "1" *-[#595959,plain]-> "1" Repository : repo
+ProductService "1" *-[#595959,plain]-> "1" Repository : productRepo
+RetetaService "1" *-[#595959,plain]-> "1" Repository : retetaRepo
+StocService "1" *-[#595959,plain]-> "1" Repository : stocRepo
+OrderService "1" *-[#595959,plain]-> "1" Repository : orderRepo
+OrderService "1" *-[#595959,plain]-> "1" Repository : productRepo
+OrderService "1" *-[#595959,plain]-> "1" Repository : retetaRepo
+
+FileOrderRepository "1" *-[#595959,plain]-> "1" Repository : productRepository
+
+' validators
+OrderItemValidator -[#008200,dashed]-^ Validator
+OrderValidator -[#008200,dashed]-^ Validator
+ProductValidator -[#008200,dashed]-^ Validator
+RetetaValidator -[#008200,dashed]-^ Validator
+StocValidator -[#008200,dashed]-^ Validator
+OrderValidator "1" *-[#595959,plain]-> "1" OrderItemValidator : itemValidator
+
+@enduml
