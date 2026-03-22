@@ -24,7 +24,7 @@ public class FileRetetaRepository
     protected Reteta extractEntity(String line) {
 
         String[] elems = line.split(",");
-
+        if (elems.length >= 2){
         int productId = Integer.parseInt(elems[0]);
         List<IngredientReteta> ingrediente = new ArrayList<>();
         int index=1;
@@ -36,6 +36,9 @@ public class FileRetetaRepository
             ingrediente.add(new IngredientReteta(ingredientName, ingredientQuantity));
         }
         return new Reteta(productId, ingrediente);
+        }else{
+            return new Reteta(0, null);
+        }
     }
 
     @Override

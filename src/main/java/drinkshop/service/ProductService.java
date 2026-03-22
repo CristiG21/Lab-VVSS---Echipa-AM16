@@ -2,6 +2,7 @@ package drinkshop.service;
 
 import drinkshop.domain.*;
 import drinkshop.repository.Repository;
+import drinkshop.service.validator.ValidationException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,11 +16,14 @@ public class ProductService {
     }
 
     public void addProduct(Product p) {
+        if (p.getPret() <= 0) throw new ValidationException("Prețul trebuie să fie pozitiv");
+
         productRepo.save(p);
     }
 
     public void updateProduct(int id, String name, double price, CategorieBautura categorie, TipBautura tip) {
         Product updated = new Product(id, name, price, categorie, tip);
+        if (price <= 0) throw new ValidationException("Prețul trebuie să fie pozitiv");
         productRepo.update(updated);
     }
 

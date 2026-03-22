@@ -21,14 +21,17 @@ public class FileProductRepository
     protected Product extractEntity(String line) {
 
         String[] elems = line.split(",");
+        if (elems.length < 5) {
+            return new Product(0, "", 0.0, null, null);
+        }else {
+            int id = Integer.parseInt(elems[0]);
+            String name = elems[1];
+            double price = Double.parseDouble(elems[2]);
+            CategorieBautura categorie = CategorieBautura.valueOf(elems[3]);
+            TipBautura tip = TipBautura.valueOf(elems[4]);
 
-        int id = Integer.parseInt(elems[0]);
-        String name = elems[1];
-        double price = Double.parseDouble(elems[2]);
-        CategorieBautura categorie = CategorieBautura.valueOf(elems[3]);
-        TipBautura tip = TipBautura.valueOf(elems[4]);
-
-        return new Product(id, name, price, categorie, tip);
+            return new Product(id, name, price, categorie, tip);
+        }
     }
 
     @Override

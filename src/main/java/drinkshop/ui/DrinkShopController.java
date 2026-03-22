@@ -227,12 +227,16 @@ public class DrinkShopController {
         currentOrder.getItems().addAll(currentOrderItems);
         currentOrder.computeTotalPrice();
 
-        service.addOrder(currentOrder);
-        txtReceipt.setText(service.generateReceipt(currentOrder));
+        try {
+            service.addOrder(currentOrder);
+            txtReceipt.setText(service.generateReceipt(currentOrder));
 
-        currentOrderItems.clear();
-        currentOrder = new Order(currentOrder.getId() + 1);
-        updateOrderTotal();
+            currentOrderItems.clear();
+            currentOrder = new Order(currentOrder.getId() + 1);
+            updateOrderTotal();
+        } catch (Exception ignored) {
+
+        }
     }
 
     private void updateOrderTotal() {
