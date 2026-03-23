@@ -16,7 +16,17 @@ public class ProductService {
     }
 
     public void addProduct(Product p) {
-        if (p.getPret() <= 0) throw new ValidationException("Prețul trebuie să fie pozitiv");
+        if (p.getNume() == null || p.getNume().isBlank()) {
+            throw new ValidationException("Numele trebuie sa aiba cel putin 1 caracter");
+        }
+
+        if (p.getNume().length() > 255) {
+            throw new ValidationException("Numele nu poate depasi 255 de caractere");
+        }
+
+        if (p.getPret() <= 0) {
+            throw new ValidationException("Prețul trebuie să fie pozitiv");
+        }
 
         productRepo.save(p);
     }
