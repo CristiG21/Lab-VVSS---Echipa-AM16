@@ -2,6 +2,7 @@ package drinkshop.service;
 
 import drinkshop.domain.CategorieBautura;
 import drinkshop.domain.Product;
+import drinkshop.domain.Reteta;
 import drinkshop.domain.TipBautura;
 import drinkshop.repository.Repository;
 import drinkshop.service.validator.ValidationException;
@@ -10,11 +11,10 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -68,7 +68,11 @@ class ProductServiceTest {
         return new ProductService(repo);
     }
 
-    private Product validProduct(String name, double price) {
+    private String textOfLength(int length) {
+        return "F".repeat(length);
+    }
+
+    private Product productWithoutRecipe(String name, double price) {
         return new Product(
                 1,
                 name,
@@ -78,33 +82,15 @@ class ProductServiceTest {
         );
     }
 
-    static Stream<String> invalidNames() {
-        return Stream.of(
-                "",
-                "a".repeat(256)
-        );
-    }
-
-    static Stream<String> validBoundaryNames() {
-        return Stream.of(
-                "F",
-                "a".repeat(254),
-                "a".repeat(255)
-        );
-    }
-
-    static Stream<Double> invalidPrices() {
-        return Stream.of(
-                -0.01,
-                0.0
-        );
-    }
-
-    static Stream<Double> validBoundaryPrices() {
-        return Stream.of(
-                0.01,
-                12.5,
-                999.99
+    private Product productWithRecipe(String name, double price, int recipeId) {
+        Reteta reteta = new Reteta(recipeId, new ArrayList<>());
+        return new Product(
+                1,
+                name,
+                price,
+                CategorieBautura.JUICE,
+                TipBautura.BASIC,
+                reteta
         );
     }
 
@@ -113,45 +99,82 @@ class ProductServiceTest {
     class EcpTests {
 
         @Test
-        @DisplayName("ECP valid - should save product when name and price are valid")
-        void addProductValid_ECP() {
-            // Arrange
+        @DisplayName("TC1_EC - valid product")
+        void TC1_EC() {
             InMemoryProductRepository repo = new InMemoryProductRepository();
             ProductService service = createServiceWithRepo(repo);
-            Product product = validProduct("Fresh Orange", 12.5);
 
-            // Act
+            Product product = productWithRecipe("Fresh Orange", 12.5, 101);
+
             service.addProduct(product);
 
-            // Assert
             assertEquals(1, repo.findAll().size());
             assertEquals("Fresh Orange", repo.findAll().get(0).getNume());
         }
 
-        @ParameterizedTest
-        @MethodSource("drinkshop.service.ProductServiceTest#invalidNames")
-        @DisplayName("ECP invalid - should reject invalid names")
-        void addProductInvalidName_ECP(String invalidName) {
-            // Arrange
+        @Test
+        @DisplayName("TC3_EC - empty name")
+        void TC3_EC() {
             InMemoryProductRepository repo = new InMemoryProductRepository();
             ProductService service = createServiceWithRepo(repo);
-            Product product = validProduct(invalidName, 12.5);
 
-            // Act + Assert
+            Product product = productWithRecipe("", 12.5, 101);
+
             assertThrows(ValidationException.class, () -> service.addProduct(product));
         }
 
-        @ParameterizedTest
-        @MethodSource("drinkshop.service.ProductServiceTest#invalidPrices")
-        @DisplayName("ECP invalid - should reject non-positive price")
-        void addProductInvalidPrice_ECP(Double invalidPrice) {
-            // Arrange
+        @Test
+        @DisplayName("TC4_EC - name longer than 255 chars")
+        void TC4_EC() {
             InMemoryProductRepository repo = new InMemoryProductRepository();
             ProductService service = createServiceWithRepo(repo);
-            Product product = validProduct("Fresh Orange", invalidPrice);
 
-            // Act + Assert
+            Product product = productWithRecipe(textOfLength(300), 12.5, 101);
+
             assertThrows(ValidationException.class, () -> service.addProduct(product));
+        }
+
+        @Test
+        @DisplayName("TC5_EC - invalid price format abc")
+        void TC5_EC() {
+            assertThrows(NumberFormatException.class, () -> Double.parseDouble("abc"));
+        }
+
+        @Test
+        @DisplayName("TC6_EC - price equal to zero")
+        void TC6_EC() {
+            InMemoryProductRepository repo = new InMemoryProductRepository();
+            ProductService service = createServiceWithRepo(repo);
+
+            Product product = productWithRecipe("Fresh Orange", 0.0, 101);
+
+            assertThrows(ValidationException.class, () -> service.addProduct(product));
+        }
+
+        @Test
+        @DisplayName("TC10_EC - invalid recipe")
+        void TC10_EC() {
+            InMemoryProductRepository repo = new InMemoryProductRepository();
+            ProductService service = createServiceWithRepo(repo);
+
+            Product product = productWithRecipe("Fresh Orange", 12.5, 301);
+
+            assertThrows(ValidationException.class, () -> service.addProduct(product));
+        }
+
+        @Test
+        @DisplayName("TC11_EC - already used recipe")
+        void TC11_EC() {
+            InMemoryProductRepository repo = new InMemoryProductRepository();
+            ProductService service = createServiceWithRepo(repo);
+
+            // precondition: exista deja un produs cu aceasta reteta
+            Product existingProduct = productWithRecipe("Produs existent", 10.0, 201);
+            service.addProduct(existingProduct);
+
+            Product newProduct = productWithRecipe("Fresh Orange", 12.5, 201);
+
+            assertThrows(ValidationException.class, () -> service.addProduct(newProduct));
         }
     }
 
@@ -159,84 +182,126 @@ class ProductServiceTest {
     @DisplayName("BVA tests")
     class BvaTests {
 
-        @ParameterizedTest
-        @MethodSource("drinkshop.service.ProductServiceTest#validBoundaryNames")
-        @DisplayName("BVA valid - should accept names on valid boundaries")
-        void addProductValidNameBoundaries_BVA(String validName) {
-            // Arrange
+        @Test
+        @DisplayName("TC1_BVA - name length 0")
+        void TC1_BVA() {
             InMemoryProductRepository repo = new InMemoryProductRepository();
             ProductService service = createServiceWithRepo(repo);
-            Product product = validProduct(validName, 12.5);
 
-            // Act
+            Product product = productWithRecipe("", 12.5, 101);
+
+            assertThrows(ValidationException.class, () -> service.addProduct(product));
+        }
+
+        @Test
+        @DisplayName("TC3_BVA - name length 1")
+        void TC3_BVA() {
+            InMemoryProductRepository repo = new InMemoryProductRepository();
+            ProductService service = createServiceWithRepo(repo);
+
+            Product product = productWithRecipe(textOfLength(1), 12.5, 101);
+
             service.addProduct(product);
 
-            // Assert
             assertEquals(1, repo.findAll().size());
         }
 
         @Test
-        @DisplayName("BVA invalid - should reject empty name")
-        void addProductNameBelowMin_BVA() {
-            // Arrange
+        @DisplayName("TC4_BVA - name length 254")
+        void TC4_BVA() {
             InMemoryProductRepository repo = new InMemoryProductRepository();
             ProductService service = createServiceWithRepo(repo);
-            Product product = validProduct("", 12.5);
 
-            // Act + Assert
-            assertThrows(ValidationException.class, () -> service.addProduct(product));
-        }
+            Product product = productWithRecipe(textOfLength(254), 12.5, 101);
 
-        @Test
-        @DisplayName("BVA invalid - should reject name over max length")
-        void addProductNameAboveMax_BVA() {
-            // Arrange
-            InMemoryProductRepository repo = new InMemoryProductRepository();
-            ProductService service = createServiceWithRepo(repo);
-            Product product = validProduct("a".repeat(256), 12.5);
-
-            // Act + Assert
-            assertThrows(ValidationException.class, () -> service.addProduct(product));
-        }
-
-        @ParameterizedTest
-        @MethodSource("drinkshop.service.ProductServiceTest#validBoundaryPrices")
-        @DisplayName("BVA valid - should accept positive prices")
-        void addProductValidPriceBoundaries_BVA(Double validPrice) {
-            // Arrange
-            InMemoryProductRepository repo = new InMemoryProductRepository();
-            ProductService service = createServiceWithRepo(repo);
-            Product product = validProduct("Fresh Orange", validPrice);
-
-            // Act
             service.addProduct(product);
 
-            // Assert
             assertEquals(1, repo.findAll().size());
         }
 
         @Test
-        @DisplayName("BVA invalid - should reject price below zero")
-        void addProductPriceBelowBoundary_BVA() {
-            // Arrange
+        @DisplayName("TC5_BVA - name length 255")
+        void TC5_BVA() {
             InMemoryProductRepository repo = new InMemoryProductRepository();
             ProductService service = createServiceWithRepo(repo);
-            Product product = validProduct("Fresh Orange", -0.01);
 
-            // Act + Assert
+            Product product = productWithRecipe(textOfLength(255), 12.5, 101);
+
+            service.addProduct(product);
+
+            assertEquals(1, repo.findAll().size());
+        }
+
+        @Test
+        @DisplayName("TC6_BVA - name length 256")
+        void TC6_BVA() {
+            InMemoryProductRepository repo = new InMemoryProductRepository();
+            ProductService service = createServiceWithRepo(repo);
+
+            Product product = productWithRecipe(textOfLength(256), 12.5, 101);
+
             assertThrows(ValidationException.class, () -> service.addProduct(product));
         }
 
         @Test
-        @DisplayName("BVA invalid - should reject price equal to zero")
-        void addProductPriceAtBoundaryZero_BVA() {
-            // Arrange
+        @DisplayName("TC7_BVA - price below lower boundary")
+        void TC7_BVA() {
             InMemoryProductRepository repo = new InMemoryProductRepository();
             ProductService service = createServiceWithRepo(repo);
-            Product product = validProduct("Fresh Orange", 0.0);
 
-            // Act + Assert
+            Product product = productWithRecipe("Fresh Orange", -0.01, 101);
+
             assertThrows(ValidationException.class, () -> service.addProduct(product));
+        }
+
+        @Test
+        @DisplayName("TC8_BVA - price at lower invalid boundary")
+        void TC8_BVA() {
+            InMemoryProductRepository repo = new InMemoryProductRepository();
+            ProductService service = createServiceWithRepo(repo);
+
+            Product product = productWithRecipe("Fresh Orange", 0.0, 101);
+
+            assertThrows(ValidationException.class, () -> service.addProduct(product));
+        }
+
+        @Test
+        @DisplayName("TC9_BVA - price at lower valid boundary")
+        void TC9_BVA() {
+            InMemoryProductRepository repo = new InMemoryProductRepository();
+            ProductService service = createServiceWithRepo(repo);
+
+            Product product = productWithRecipe("Fresh Orange", 0.01, 101);
+
+            service.addProduct(product);
+
+            assertEquals(1, repo.findAll().size());
+        }
+
+        @Test
+        @DisplayName("TC10_BVA - price Double.MAX_VALUE - 1")
+        void TC10_BVA() {
+            InMemoryProductRepository repo = new InMemoryProductRepository();
+            ProductService service = createServiceWithRepo(repo);
+
+            Product product = productWithRecipe("Fresh Orange", Double.MAX_VALUE - 1, 101);
+
+            service.addProduct(product);
+
+            assertEquals(1, repo.findAll().size());
+        }
+
+        @Test
+        @DisplayName("TC11_BVA - price Double.MAX_VALUE")
+        void TC11_BVA() {
+            InMemoryProductRepository repo = new InMemoryProductRepository();
+            ProductService service = createServiceWithRepo(repo);
+
+            Product product = productWithRecipe("Fresh Orange", Double.MAX_VALUE, 101);
+
+            service.addProduct(product);
+
+            assertEquals(1, repo.findAll().size());
         }
     }
 }

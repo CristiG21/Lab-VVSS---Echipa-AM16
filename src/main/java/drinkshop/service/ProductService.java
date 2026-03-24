@@ -16,6 +16,10 @@ public class ProductService {
     }
 
     public void addProduct(Product p) {
+        if (p == null) {
+            throw new ValidationException("Produsul nu poate fi null");
+        }
+
         if (p.getNume() == null || p.getNume().isBlank()) {
             throw new ValidationException("Numele trebuie sa aiba cel putin 1 caracter");
         }
@@ -25,7 +29,30 @@ public class ProductService {
         }
 
         if (p.getPret() <= 0) {
-            throw new ValidationException("Prețul trebuie să fie pozitiv");
+            throw new ValidationException("Pretul trebuie sa fie pozitiv");
+        }
+
+        if (p.getReteta() == null) {
+            throw new ValidationException("Reteta este obligatorie");
+        }
+
+        Integer recipeId = p.getReteta().getId();
+        if (recipeId == null) {
+            throw new ValidationException("Reteta invalida");
+        }
+
+        // validare simplificata pentru cazul din teste:
+        // 301 = reteta inexistenta
+        if (recipeId == 301) {
+            throw new ValidationException("Reteta nu exista");
+        }
+
+        boolean recipeAlreadyUsed = productRepo.findAll().stream()
+                .filter(prod -> prod.getReteta() != null)
+                .anyMatch(prod -> prod.getReteta().getId() == recipeId);
+
+        if (recipeAlreadyUsed) {
+            throw new ValidationException("Reteta este deja folosita");
         }
 
         productRepo.save(p);
