@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><title>testspec Proiect233 - gdir3532_WBT</title>
+<link type="text/css" rel="stylesheet" href="https://www.scs.ubbcluj.ro/testlink/gui/themes/default/css/tl_documents.css" />
+<style type="text/css" media="print">.notprintable { display:none;}</style>
+</head>
+<body>
+<div>
+<div style="float:right;">TestLink Community [configure $tlCfg-&gt;document_generator-&gt;company_name]</div>
+<div>&nbsp;</div><hr />
+<p style="text-align: center;"><img alt="TestLink logo" title="configure using $tlCfg->document_generator->company_logo"  width= height= src="https://www.scs.ubbcluj.ro/testlink/gui/themes/default/images/tl-logo-transparent-25.png" /></p></div>
+<div class="doc_title"><p>Test Specification</p></div>
+<div class="doc_title" style="text-align:left;margin: auto;"><p>Test Project: Proiect233<br/>Test Suite: Proiect233 - gdir3532_WBT</p></div>
+<div class="summary"><p id="printedby">Printed by TestLink on 03/04/2026</p></div>
+<div class="pagefooter" id="copyright">2012 &copy; TestLink Community</div>
+<h1 class="general" style="page-break-before: always">Table Of Contents</h1><div class="toc"><p style="padding-left: 20px;"><b><a href="#toc_1">1.gdir3532_WBT</a></b></p>
+<p style="padding-left: 45px;"><a href="#toc_tc29444">P233-64: F02_TC01</a></p><p style="padding-left: 45px;"><a href="#toc_tc29447">P233-65: F02_TC02</a></p><p style="padding-left: 45px;"><a href="#toc_tc29451">P233-66: F02_TC03</a></p><p style="padding-left: 45px;"><a href="#toc_tc29456">P233-67: F02_TC04</a></p><p style="padding-left: 45px;"><a href="#toc_tc29462">P233-68: F02_TC05</a></p><p style="padding-left: 45px;"><a href="#toc_tc29468">P233-69: F02_TC06</a></p><p style="padding-left: 45px;"><a href="#toc_tc29476">P233-70: F02_TC07</a></p><p style="padding-left: 45px;"><a href="#toc_tc29485">P233-71: F02_TC08</a></p></div><h1 class="doclevel" >Scope</h1>
+<div class="txtlevel"><p>Proiect de testare pentru studentii din grupa 233.</p></div>
+ <br/><a name='toc_1'></a>
+<h1 class='doclevel'>1.Test Suite : gdir3532_WBT</h1>
+<div><p>Se testează adăugarea unei comenzi noi</p>
+</div><a name="toc_tc29444"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-64: F02_TC01&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda&nbsp;addOrder&nbsp;aruncă excepție atunci c&acirc;nd parametrul&nbsp;Order&nbsp;este&nbsp;null.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>OrderService&nbsp;este inițializat corect.</li>
+	<li>StocService&nbsp;este valid și disponibil.</li>
+</ul>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>Se apelează metoda&nbsp;addOrder(null, stocService).</p>
+
+<p>&nbsp;</p>
+</td><td><p>Se aruncă o excepție cu mesajul:&nbsp;Comanda nu poate fi null.</p>
+
+<p>&nbsp;</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >drinkshop.service.OrderServiceTest</td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" >drinkshop.service.OrderServiceTest#F02_TC01</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F02:  AdaugareComanda [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc29447"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-65: F02_TC02&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda&nbsp;addOrder&nbsp;aruncă excepție atunci c&acirc;nd comanda are lista de itemi&nbsp;null.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>OrderService&nbsp;este inițializat corect.</li>
+	<li>StocService&nbsp;este valid și disponibil.</li>
+	<li>Se definește comanda: Order{id=1, items=null, totalPrice=50}</li>
+</ul>
+
+<p>&nbsp;</p>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>Se creează un obiect&nbsp;Order&nbsp;cu:</p>
+
+<ul>
+	<li>id = 1</li>
+	<li>items = null</li>
+	<li>totalPrice = 50</li>
+</ul>
+</td><td></td></tr><tr><td width="5">2</td><td><p>Se apelează metoda&nbsp;addOrder(order, stocService).</p>
+</td><td><p>Se aruncă o excepție cu mesajul:&nbsp;Comanda trebuie sa contina cel putin un produs.</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >drinkshop.service.OrderServiceTest</td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" >drinkshop.service.OrderServiceTest#F02_TC02</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F02:  AdaugareComanda [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc29451"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-66: F02_TC03&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda&nbsp;addOrder&nbsp;aruncă excepție atunci c&acirc;nd comanda are lista de itemi goală.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>OrderService&nbsp;este inițializat corect.</li>
+	<li>StocService&nbsp;este valid și disponibil.</li>
+	<li>Se definește comanda: Order{id=2, items=[], totalPrice=0}</li>
+</ul>
+
+<p>&nbsp;</p>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>Se creează un obiect&nbsp;Order&nbsp;cu:</p>
+
+<ul>
+	<li>id = 2</li>
+	<li>items = []</li>
+	<li>totalPrice = 0</li>
+</ul>
+
+<p>&nbsp;</p>
+</td><td></td></tr><tr><td width="5">2</td><td><p>Se apelează metoda&nbsp;addOrder(order, stocService).</p>
+</td><td><p>Se aruncă o excepție cu mesajul:&nbsp;Comanda trebuie sa contina cel putin un produs.</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >drinkshop.service.OrderServiceTest</td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" >drinkshop.service.OrderServiceTest#F02_TC03</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F02:  AdaugareComanda [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc29456"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-67: F02_TC04&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda&nbsp;addOrder&nbsp;aruncă excepție atunci c&acirc;nd un produs are cantitatea mai mică sau egală cu 0.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>OrderService&nbsp;este inițializat corect.</li>
+	<li>StocService&nbsp;este valid și disponibil.</li>
+	<li>Există rețetă pentru produsul&nbsp;P1.</li>
+	<li>Se definește:
+	<ul>
+		<li>P1 = Product{id=1, nume=&quot;Pizza&quot;, ...}</li>
+		<li>OrderItem{product=P1, quantity=0}</li>
+		<li>Order{id=3, items=[OrderItem{product=P1, quantity=0}], totalPrice=30}</li>
+	</ul>
+	</li>
+</ul>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>Se creează produsul&nbsp;P1.</p>
+</td><td></td></tr><tr><td width="5">2</td><td><p>Se creează un&nbsp;OrderItem&nbsp;cu:</p>
+
+<ul>
+	<li>product = P1</li>
+	<li>quantity = 0</li>
+</ul>
+
+<p>&nbsp;</p>
+</td><td></td></tr><tr><td width="5">3</td><td><p>Se creează un&nbsp;Order&nbsp;care conține acel&nbsp;OrderItem.</p>
+</td><td></td></tr><tr><td width="5">4</td><td><p>Se apelează metoda&nbsp;addOrder(order, stocService).</p>
+</td><td><p>Se aruncă o excepție cu mesajul:&nbsp;Cantitatea trebuie sa fie mai mare decat 0.</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >drinkshop.service.OrderServiceTest</td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" >drinkshop.service.OrderServiceTest#F02_TC04</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F02:  AdaugareComanda [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc29462"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-68: F02_TC05&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda&nbsp;addOrder&nbsp;aruncă excepție atunci c&acirc;nd pentru produsul comandat nu există rețetă.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>OrderService&nbsp;este inițializat corect.</li>
+	<li>StocService&nbsp;este valid și disponibil.</li>
+	<li>Nu există rețetă pentru: P3 = Product{id=99, nume=&quot;ProdusFaraReteta&quot;}</li>
+	<li>Se definește: Order{id=4, items=[OrderItem{product=P3, quantity=2}], totalPrice=40}</li>
+</ul>
+
+<p>&nbsp;</p>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>Se creează produsul&nbsp;P3&nbsp;fără rețetă asociată.</p>
+</td><td></td></tr><tr><td width="5">2</td><td><p>Se creează un&nbsp;OrderItem&nbsp;cu:</p>
+
+<ul>
+	<li>product = P3</li>
+	<li>quantity = 2</li>
+</ul>
+
+<p>&nbsp;</p>
+</td><td></td></tr><tr><td width="5">3</td><td><p>Se creează un&nbsp;Order&nbsp;care conține acel&nbsp;OrderItem.</p>
+</td><td></td></tr><tr><td width="5">4</td><td><p>Se apelează metoda&nbsp;addOrder(order, stocService).</p>
+</td><td><p>Se aruncă o excepție cu mesajul:&nbsp;Nu exista reteta pentru produsul cu id 99</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >drinkshop.service.OrderServiceTest</td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" >drinkshop.service.OrderServiceTest#F02_TC05</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F02:  AdaugareComanda [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc29468"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-69: F02_TC06&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda&nbsp;addOrder&nbsp;salvează corect o comandă validă care conține un singur produs.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>OrderService&nbsp;este inițializat corect.</li>
+	<li>StocService&nbsp;este valid și disponibil.</li>
+	<li>Există produsul: P1 = Product{id=1, name=&quot;Pizza&quot;}</li>
+	<li>Există rețetă pentru&nbsp;P1.</li>
+	<li>Există stoc suficient pentru ingredientele necesare.</li>
+	<li>Se definește: Order{id=5, items=[OrderItem{product=P1, quantity=2}], totalPrice=60}</li>
+</ul>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>Se creează produsul&nbsp;P1.</p>
+</td><td></td></tr><tr><td width="5">2</td><td><p>Se creează un&nbsp;OrderItem&nbsp;cu:</p>
+
+<ul>
+	<li>product = P1</li>
+	<li>quantity = 2</li>
+</ul>
+</td><td></td></tr><tr><td width="5">3</td><td><p>Se creează un&nbsp;Order&nbsp;care conține acel&nbsp;OrderItem.</p>
+</td><td></td></tr><tr><td width="5">4</td><td><p>Se apelează metoda&nbsp;addOrder(order, stocService).</p>
+</td><td><ol>
+	<li>Nu se aruncă nicio excepție.</li>
+	<li>Ingredientele necesare sunt calculate corect.</li>
+	<li>Stocul este validat cu succes.</li>
+	<li>Stocul este actualizat.</li>
+	<li>Comanda este salvată &icirc;n repository.</li>
+</ol>
+
+<p>&nbsp;</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >drinkshop.service.OrderServiceTest</td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" >drinkshop.service.OrderServiceTest#F02_TC06</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F02:  AdaugareComanda [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc29476"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-70: F02_TC07&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda&nbsp;addOrder&nbsp;procesează corect o comandă validă care conține două produse valide.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>OrderService&nbsp;este inițializat corect.</li>
+	<li>StocService&nbsp;este valid și disponibil.</li>
+	<li>Există produsele:
+	<ul>
+		<li>P1 = Product{id=1, name=&quot;Pizza&quot;}</li>
+		<li>P2 = Product{id=2, name=&quot;Burger&quot;}</li>
+	</ul>
+	</li>
+	<li>Există rețetă pentru&nbsp;P1.</li>
+	<li>Există rețetă pentru&nbsp;P2.</li>
+	<li>Există stoc suficient pentru toate ingredientele necesare.</li>
+	<li>Se definește: Order{id=6, items=[OrderItem{product=P1, quantity=1}, OrderItem{product=P2, quantity=2}], totalPrice=90}</li>
+</ul>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>Se creează produsul&nbsp;P1.</p>
+</td><td></td></tr><tr><td width="5">2</td><td><p>Se creează produsul&nbsp;P2.</p>
+</td><td></td></tr><tr><td width="5">3</td><td><p>Se creează două obiecte&nbsp;OrderItem:</p>
+
+<ul>
+	<li>OrderItem{product=P1, quantity=1}</li>
+	<li>OrderItem{product=P2, quantity=2}</li>
+</ul>
+</td><td></td></tr><tr><td width="5">4</td><td><p>Se creează un&nbsp;Order&nbsp;care conține cele două obiecte&nbsp;OrderItem.</p>
+</td><td></td></tr><tr><td width="5">5</td><td><p>Se apelează metoda&nbsp;addOrder(order, stocService).</p>
+</td><td><ol>
+	<li>Nu se aruncă nicio excepție.</li>
+	<li>Ambele produse sunt procesate &icirc;n buclă.</li>
+	<li>Ingredientele necesare sunt calculate corect pentru ambele produse.</li>
+	<li>Stocul este validat cu succes.</li>
+	<li>Stocul este actualizat.</li>
+	<li>Comanda este salvată &icirc;n repository.</li>
+</ol>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >drinkshop.service.OrderServiceTest</td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" >drinkshop.service.OrderServiceTest#F02_TC07</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F02:  AdaugareComanda [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc29485"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-71: F02_TC08&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda&nbsp;addOrder&nbsp;se oprește la primul item invalid și nu mai procesează itemii următori.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>OrderService&nbsp;este inițializat corect.</li>
+	<li>StocService&nbsp;este valid și disponibil.</li>
+	<li>Există produsele:
+	<ul>
+		<li>P1 = Product{id=1, name=&quot;Pizza&quot;}</li>
+		<li>P2 = Product{id=2, name=&quot;Burger&quot;}</li>
+	</ul>
+	</li>
+	<li>Există rețetă pentru&nbsp;P1.</li>
+	<li>Există rețetă pentru&nbsp;P2.</li>
+	<li>Se definește: Order{id=7, items=[OrderItem{product=P1, quantity=0}, OrderItem{product=P2, quantity=2}], totalPrice=120}</li>
+</ul>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>Se creează produsul&nbsp;P1.</p>
+</td><td></td></tr><tr><td width="5">2</td><td><p>Se creează produsul&nbsp;P2.</p>
+</td><td></td></tr><tr><td width="5">3</td><td><p>Se creează două obiecte&nbsp;OrderItem:</p>
+
+<ul>
+	<li>OrderItem{product=P1, quantity=0}</li>
+	<li>OrderItem{product=P2, quantity=2}</li>
+</ul>
+</td><td></td></tr><tr><td width="5">4</td><td><p>Se creează un&nbsp;Order&nbsp;care conține cele două obiecte&nbsp;OrderItem.</p>
+</td><td></td></tr><tr><td width="5">5</td><td><p>Se apelează metoda&nbsp;addOrder(order, stocService).</p>
+</td><td><ol>
+	<li>Se aruncă o excepție cu mesajul:&nbsp;Cantitatea trebuie sa fie mai mare decat 0.</li>
+	<li>Procesarea se oprește la primul item invalid.</li>
+	<li>Al doilea item nu este procesat.</li>
+	<li>Comanda nu este salvată.</li>
+</ol>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" >drinkshop.service.OrderServiceTest</td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" >drinkshop.service.OrderServiceTest#F02_TC08</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F02:  AdaugareComanda [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+
+</body>
+</html>
