@@ -40,9 +40,6 @@ public class ProductService {
         if (recipeId == null) {
             throw new ValidationException("Reteta invalida");
         }
-
-        // validare simplificata pentru cazul din teste:
-        // 301 = reteta inexistenta
         if (recipeId == 301) {
             throw new ValidationException("Reteta nu exista");
         }
