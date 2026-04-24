@@ -1,0 +1,557 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><title>testspec Proiect233 - gdir3532_IntT</title>
+<link type="text/css" rel="stylesheet" href="https://www.scs.ubbcluj.ro/testlink/gui/themes/default/css/tl_documents.css" />
+<style type="text/css" media="print">.notprintable { display:none;}</style>
+</head>
+<body>
+<div>
+<div style="float:right;">TestLink Community [configure $tlCfg-&gt;document_generator-&gt;company_name]</div>
+<div>&nbsp;</div><hr />
+<p style="text-align: center;"><img alt="TestLink logo" title="configure using $tlCfg->document_generator->company_logo"  width= height= src="https://www.scs.ubbcluj.ro/testlink/gui/themes/default/images/tl-logo-transparent-25.png" /></p></div>
+<div class="doc_title"><p>Test Specification</p></div>
+<div class="doc_title" style="text-align:left;margin: auto;"><p>Test Project: Proiect233<br/>Test Suite: Proiect233 - gdir3532_IntT</p></div>
+<div class="summary"><p id="printedby">Printed by TestLink on 24/04/2026</p></div>
+<div class="pagefooter" id="copyright">2012 &copy; TestLink Community</div>
+<h1 class="general" style="page-break-before: always">Table Of Contents</h1><div class="toc"><p style="padding-left: 20px;"><b><a href="#toc_1">1.gdir3532_IntT</a></b></p>
+<p style="padding-left: 45px;"><a href="#toc_tc30303">P233-88: ProductService Unit Test - Get all products</a></p><p style="padding-left: 45px;"><a href="#toc_tc30305">P233-89: ProductService Unit Test - Add invalid product</a></p><p style="padding-left: 45px;"><a href="#toc_tc30307">P233-90: ProductService Unit Test - Add valid product</a></p><p style="padding-left: 45px;"><a href="#toc_tc30309">P233-91: ProductService Unit Test - Find product by ID</a></p><p style="padding-left: 45px;"><a href="#toc_tc30311">P233-92: ProductService Unit Test - Filter products by category</a></p><p style="padding-left: 45px;"><a href="#toc_tc30313">P233-93: ProductService Unit Test - Filter products by type</a></p><p style="padding-left: 45px;"><a href="#toc_tc30353">P233-94: ProductService Validator Integration Test - Add valid product</a></p><p style="padding-left: 45px;"><a href="#toc_tc30355">P233-95: ProductService Validator Integration Test - Add product with null name</a></p><p style="padding-left: 45px;"><a href="#toc_tc30357">P233-96: ProductService Validator Integration Test - Add product with zero price</a></p><p style="padding-left: 45px;"><a href="#toc_tc30359">P233-97: ProductService Validator Integration Test - Add product without recipe</a></p><p style="padding-left: 45px;"><a href="#toc_tc30361">P233-98: ProductService Validator Integration Test - Add product with recipe not found</a></p><p style="padding-left: 45px;"><a href="#toc_tc30363">P233-99: ProductService Validator Integration Test - Add product with already used recipe</a></p><p style="padding-left: 45px;"><a href="#toc_tc30365">P233-100: ProductService File Repository Integration Test - Add valid product</a></p><p style="padding-left: 45px;"><a href="#toc_tc30367">P233-101: ProductService File Repository Integration Test - Add null product</a></p><p style="padding-left: 45px;"><a href="#toc_tc30369">P233-102: ProductService File Repository Integration Test - Add product with null name</a></p><p style="padding-left: 45px;"><a href="#toc_tc30371">P233-103: ProductService File Repository Integration Test - Add product with long name</a></p><p style="padding-left: 45px;"><a href="#toc_tc30373">P233-104: ProductService File Repository Integration Test - Add product with zero price</a></p><p style="padding-left: 45px;"><a href="#toc_tc30375">P233-105: ProductService File Repository Integration Test - Add product with already used recipe</a></p><p style="padding-left: 45px;"><a href="#toc_tc30377">P233-106: ProductService Full Integration Test - Add valid product</a></p><p style="padding-left: 45px;"><a href="#toc_tc30379">P233-107: ProductService Full Integration Test - Add null product</a></p><p style="padding-left: 45px;"><a href="#toc_tc30381">P233-108: ProductService Full Integration Test - Add product with null name</a></p><p style="padding-left: 45px;"><a href="#toc_tc30383">P233-109: ProductService Full Integration Test - Add product with long name</a></p><p style="padding-left: 45px;"><a href="#toc_tc30385">P233-110: ProductService Full Integration Test - Add product with zero price</a></p><p style="padding-left: 45px;"><a href="#toc_tc30387">P233-111: ProductService Full Integration Test - Add product with already used recipe</a></p></div><h1 class="doclevel" >Scope</h1>
+<div class="txtlevel"><p>Proiect de testare pentru studentii din grupa 233.</p></div>
+ <br/><a name='toc_1'></a>
+<h1 class='doclevel'>1.Test Suite : gdir3532_IntT</h1>
+<div><p>Se testează integrarea clasei ProductService cu validatorul ProductValidator, repository-ul FileProductRepository și entitatea Product.</p>
+</div><a name="toc_tc30303"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-88: ProductService Unit Test - Get all products&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda getAllProducts() returnează toate produsele primite din repository și nu apelează validatorul.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>ProductService este inițializat cu productRepo mock și productValidator mock.</li>
+	<li>Repository-ul este configurat să returneze două produse mock: p1 și p2.</li>
+</ul>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>Se creează două produse mock, p1 și p2.</p>
+</td><td><p>Produsele mock sunt disponibile pentru test.</p>
+</td></tr><tr><td width="5">2</td><td><p>Se configurează productRepo.findAll() să returneze lista [p1, p2].</p>
+</td><td><p>Repository-ul este pregătit să returneze două produse.</p>
+</td></tr><tr><td width="5">3</td><td><p>Se apelează productService.getAllProducts().</p>
+</td><td><p>Metoda returnează lista de produse din repository.</p>
+</td></tr><tr><td width="5">4</td><td><p>Se verifică dimensiunea listei returnate.</p>
+</td><td><p>Lista conține exact 2 produse.</p>
+</td></tr><tr><td width="5">5</td><td><p>Se verifică dacă lista conține produsul p1.</p>
+</td><td><p>Lista conține produsul p1.</p>
+</td></tr><tr><td width="5">6</td><td><p>Se verifică interacțiunile cu mock-urile.</p>
+</td><td><p>productRepo.findAll() este apelat o singură dată, iar productValidator.validate() nu este apelat.</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30305"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-89: ProductService Unit Test - Add invalid product&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda addProduct() aruncă ValidationException atunci c&acirc;nd validatorul eșuează și nu salvează produsul &icirc;n repository.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>ProductService este inițializat cu productRepo mock și productValidator mock.</li>
+	<li>Există un produs mock numit product.</li>
+	<li>Validatorul este configurat să arunce ValidationException.</li>
+</ul>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>Se configurează productValidator.validate(product) să arunce ValidationException(&quot;invalid&quot;).</p>
+</td><td><p>Validatorul este pregătit să respingă produsul.</p>
+</td></tr><tr><td width="5">2</td><td><p>Se apelează productService.addProduct(product).</p>
+</td><td><p>Metoda aruncă ValidationException.</p>
+</td></tr><tr><td width="5">3</td><td><p>Se verifică dacă validatorul a fost apelat.</p>
+</td><td><p>productValidator.validate(product) este apelat o singură dată.</p>
+</td></tr><tr><td width="5">4</td><td><p>Se verifică dacă repository-ul a &icirc;ncercat să salveze produsul.</p>
+</td><td><p>productRepo.save() nu este apelat deloc.</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30307"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-90: ProductService Unit Test - Add valid product&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda addProduct() validează produsul și apoi &icirc;l salvează &icirc;n repository atunci c&acirc;nd produsul este valid.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>ProductService este inițializat cu productRepo mock și productValidator mock.</li>
+	<li>Există un produs mock numit product.</li>
+	<li>Validatorul este configurat să nu arunce nicio excepție.</li>
+	<li>Repository-ul este configurat să returneze produsul salvat.</li>
+</ul>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>Se configurează productValidator.validate(product) să nu arunce nicio excepție.</p>
+</td><td><p>Produsul este considerat valid.</p>
+</td></tr><tr><td width="5">2</td><td><p>Se configurează productRepo.save(product) să returneze product.</p>
+</td><td><p>Repository-ul este pregătit să salveze produsul.</p>
+</td></tr><tr><td width="5">3</td><td><p>Se apelează productService.addProduct(product).</p>
+</td><td><p>Metoda se execută fără excepții.</p>
+</td></tr><tr><td width="5">4</td><td><p>Se verifică dacă validatorul a fost apelat.</p>
+</td><td><p>productValidator.validate(product) este apelat o singură dată.</p>
+</td></tr><tr><td width="5">5</td><td><p>Se verifică dacă repository-ul a salvat produsul.</p>
+</td><td><p>productRepo.save(product) este apelat o singură dată.</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30309"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-91: ProductService Unit Test - Find product by ID&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda findById() apelează metoda findOne() din repository și returnează produsul corespunzător ID-ului.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>ProductService este inițializat cu productRepo mock.</li>
+	<li>Există un produs mock numit product.</li>
+	<li>Repository-ul este configurat să returneze product pentru ID-ul 1.</li>
+</ul>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>Se configurează productRepo.findOne(1) să returneze product.</p>
+</td><td><p>Repository-ul este pregătit să returneze produsul pentru ID-ul 1.</p>
+</td></tr><tr><td width="5">2</td><td><p>Se apelează productService.findById(1).</p>
+</td><td><p>Metoda returnează produsul primit din repository.</p>
+</td></tr><tr><td width="5">3</td><td><p>Se verifică dacă produsul returnat este același obiect cu product.</p>
+</td><td><p>Rezultatul este același obiect mock.</p>
+</td></tr><tr><td width="5">4</td><td><p>Se verifică dacă repository-ul a fost apelat corect.</p>
+</td><td><p>productRepo.findOne(1) este apelat o singură dată.</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30311"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-92: ProductService Unit Test - Filter products by category&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda filterByCategorie() returnează doar produsele care au categoria specificată.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>ProductService este inițializat cu productRepo mock.</li>
+	<li>Repository-ul este configurat să returneze trei produse mock: p1, p2, p3.</li>
+	<li>Două produse au categoria JUICE.</li>
+	<li>Un produs are categoria CLASSIC_COFFEE.</li>
+</ul>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>Se creează trei produse mock: p1, p2, p3.</p>
+</td><td><p>Produsele mock sunt disponibile pentru test.</p>
+</td></tr><tr><td width="5">2</td><td><p>Se configurează p1.getCategorie() să returneze JUICE.</p>
+</td><td><p>Produsul p1 are categoria JUICE.</p>
+</td></tr><tr><td width="5">3</td><td><p>Se configurează p2.getCategorie() să returneze CLASSIC_COFFEE.</p>
+</td><td><p>Produsul p2 are categoria CLASSIC_COFFEE.</p>
+</td></tr><tr><td width="5">4</td><td><p>Se configurează p3.getCategorie() să returneze JUICE.</p>
+</td><td><p>Produsul p3 are categoria JUICE.</p>
+</td></tr><tr><td width="5">5</td><td><p>Se configurează productRepo.findAll() să returneze lista [p1, p2, p3].</p>
+</td><td><p>Repository-ul este pregătit să returneze cele trei produse.</p>
+</td></tr><tr><td width="5">6</td><td><p>Se apelează productService.filterByCategorie(CategorieBautura.JUICE).</p>
+</td><td><p>Metoda returnează lista filtrată după categoria JUICE.</p>
+</td></tr><tr><td width="5">7</td><td><p>Se verifică dimensiunea listei filtrate.</p>
+</td><td><p>Lista conține exact 2 produse.</p>
+</td></tr><tr><td width="5">8</td><td><p>Se verifică dacă lista conține produsele p1 și p3.</p>
+</td><td><p>Lista conține doar produsele cu categoria JUICE.</p>
+</td></tr><tr><td width="5">9</td><td><p>Se verifică dacă repository-ul a fost apelat.</p>
+</td><td><p>productRepo.findAll() este apelat o singură dată.</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30313"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-93: ProductService Unit Test - Filter products by type&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda filterByTip() returnează doar produsele care au tipul specificat.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>ProductService este inițializat cu productRepo mock.</li>
+	<li>Repository-ul este configurat să returneze trei produse mock: p1, p2, p3.</li>
+	<li>Două produse au tipul BASIC.</li>
+	<li>Un produs are tipul DAIRY.</li>
+</ul>
+</td></tr><tr><td><span class="label">#:</span></td><td><span class="label">Step actions:</span></td><td><span class="label">Expected Results:</span></td></tr><tr><td width="5">1</td><td><p>Se creează trei produse mock: p1, p2, p3.</p>
+</td><td><p>Produsele mock sunt disponibile pentru test.</p>
+</td></tr><tr><td width="5">2</td><td><p>Se configurează p1.getTip() să returneze BASIC.</p>
+</td><td><p>Produsul p1 are tipul BASIC.</p>
+</td></tr><tr><td width="5">3</td><td><p>Se configurează p2.getTip() să returneze DAIRY.</p>
+</td><td><p>Produsul p2 are tipul DAIRY.</p>
+</td></tr><tr><td width="5">4</td><td><p>Se configurează p3.getTip() să returneze BASIC.</p>
+</td><td><p>Produsul p3 are tipul BASIC.</p>
+</td></tr><tr><td width="5">5</td><td><p>Se configurează productRepo.findAll() să returneze lista [p1, p2, p3].</p>
+</td><td><p>Repository-ul este pregătit să returneze cele trei produse.</p>
+</td></tr><tr><td width="5">6</td><td><p>Se apelează productService.filterByTip(TipBautura.BASIC).</p>
+</td><td><p>Metoda returnează lista filtrată după tipul BASIC.</p>
+</td></tr><tr><td width="5">7</td><td><p>Se verifică dimensiunea listei filtrate.</p>
+</td><td><p>Lista conține exact 2 produse.</p>
+</td></tr><tr><td width="5">8</td><td><p>Se verifică dacă lista conține produsele p1 și p3.</p>
+</td><td><p>Lista conține doar produsele cu tipul BASIC.</p>
+</td></tr><tr><td width="5">9</td><td><p>Se verifică dacă repository-ul a fost apelat.</p>
+</td><td><p>productRepo.findAll() este apelat o singură dată.</p>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30353"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-94: ProductService Validator Integration Test - Add valid product&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda addProduct() validează un produs corect, apelează validatorul și salvează produsul &icirc;n repository.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>ProductService este inițializat cu productRepo mock și productValidator spy.</li>
+	<li>ProductValidator folosește productRepo mock și retetaRepo mock.</li>
+	<li>Există un produs mock valid.</li>
+	<li>Există o rețetă mock validă.</li>
+	<li>Rețeta există &icirc;n retetaRepo.</li>
+	<li>Rețeta nu este folosită de alt produs.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30355"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-95: ProductService Validator Integration Test - Add product with null name&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda addProduct() aruncă ValidationException atunci c&acirc;nd produsul nu are nume și nu salvează produsul &icirc;n repository.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>ProductService este inițializat cu productRepo mock și productValidator spy.</li>
+	<li>Există un produs mock.</li>
+	<li>Produsul are numele null.</li>
+	<li>Produsul are preț valid.</li>
+	<li>Produsul are o rețetă validă.</li>
+	<li>Rețeta există &icirc;n retetaRepo.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30357"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-96: ProductService Validator Integration Test - Add product with zero price&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda addProduct() aruncă ValidationException atunci c&acirc;nd produsul are prețul 0.0.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>ProductService este inițializat cu productRepo mock și productValidator spy.</li>
+	<li>Există un produs mock.</li>
+	<li>Produsul are un nume valid.</li>
+	<li>Produsul are prețul 0.0.</li>
+	<li>Produsul are o rețetă validă.</li>
+	<li>Rețeta există &icirc;n retetaRepo.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30359"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-97: ProductService Validator Integration Test - Add product without recipe&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda addProduct() aruncă ValidationException atunci c&acirc;nd produsul nu are rețetă asociată.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>ProductService este inițializat cu productRepo mock și productValidator spy.</li>
+	<li>Există un produs mock.</li>
+	<li>Produsul are un nume valid.</li>
+	<li>Produsul are un preț valid.</li>
+	<li>Produsul nu are rețetă asociată.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30361"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-98: ProductService Validator Integration Test - Add product with recipe not found&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda addProduct() aruncă ValidationException atunci c&acirc;nd produsul are o rețetă asociată, dar rețeta nu există &icirc;n repository.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>ProductService este inițializat cu productRepo mock și productValidator spy.</li>
+	<li>Există un produs mock.</li>
+	<li>Produsul are un nume valid.</li>
+	<li>Produsul are un preț valid.</li>
+	<li>Produsul are o rețetă cu ID-ul 999.</li>
+	<li>retetaRepo.findOne(999) returnează null.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30363"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-99: ProductService Validator Integration Test - Add product with already used recipe&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda addProduct() aruncă ValidationException atunci c&acirc;nd rețeta produsului este deja folosită de alt produs.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>ProductService este inițializat cu productRepo mock și productValidator spy.</li>
+	<li>Există un produs mock nou.</li>
+	<li>Există un produs mock existent.</li>
+	<li>Ambele produse folosesc aceeași rețetă.</li>
+	<li>Produsul nou are ID-ul 10.</li>
+	<li>Produsul existent are ID-ul 11.</li>
+	<li>Rețeta există &icirc;n retetaRepo.</li>
+	<li>Repository-ul de produse returnează produsul existent &icirc;n lista produselor.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30365"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-100: ProductService File Repository Integration Test - Add valid product&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că un produs valid este validat, salvat &icirc;n FileProductRepository și poate fi regăsit ulterior &icirc;n repository.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>Există fișiere temporare pentru produse și rețete: products.txt și retete.txt.</li>
+	<li>FileProductRepository este inițializat cu fișierul temporar de produse.</li>
+	<li>FileRetetaRepository este inițializat cu fișierul temporar de rețete.</li>
+	<li>ProductValidator este inițializat cu repository-urile reale pe fișiere și este urmărit cu spy.</li>
+	<li>ProductService folosește FileProductRepository și ProductValidator.</li>
+	<li>Există un produs mock valid.</li>
+	<li>Există o rețetă mock validă, salvată &icirc;n FileRetetaRepository.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30367"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-101: ProductService File Repository Integration Test - Add null product&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda addProduct() aruncă ValidationException atunci c&acirc;nd produsul primit este null și nu salvează nimic &icirc;n repository.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>Există fișiere temporare pentru produse și rețete.</li>
+	<li>FileProductRepository este inițializat și gol.</li>
+	<li>ProductValidator este inițializat cu repository-urile reale pe fișiere și este urmărit cu spy.</li>
+	<li>ProductService este inițializat cu FileProductRepository și ProductValidator.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30369"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-102: ProductService File Repository Integration Test - Add product with null name&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că un produs cu nume null este respins de validator și nu este salvat &icirc;n FileProductRepository.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>Există fișiere temporare pentru produse și rețete.</li>
+	<li>Repository-ul de produse este inițial gol.</li>
+	<li>Există un produs mock.</li>
+	<li>Există o rețetă mock validă.</li>
+	<li>Rețeta este salvată &icirc;n FileRetetaRepository.</li>
+	<li>Produsul are preț valid și rețetă validă, dar numele este null.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30371"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-103: ProductService File Repository Integration Test - Add product with long name&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că un produs cu nume mai lung de limita permisă este respins de validator și nu este salvat &icirc;n repository.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>Există fișiere temporare pentru produse și rețete.</li>
+	<li>Repository-ul de produse este inițial gol.</li>
+	<li>Există un produs mock.</li>
+	<li>Există o rețetă mock validă.</li>
+	<li>Rețeta este salvată &icirc;n FileRetetaRepository.</li>
+	<li>Produsul are nume de 300 de caractere.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30373"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-104: ProductService File Repository Integration Test - Add product with zero price&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că un produs cu prețul 0.0 este respins de validator și nu este salvat &icirc;n FileProductRepository.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>Există fișiere temporare pentru produse și rețete.</li>
+	<li>Repository-ul de produse este inițial gol.</li>
+	<li>Există un produs mock.</li>
+	<li>Există o rețetă mock validă.</li>
+	<li>Rețeta este salvată &icirc;n FileRetetaRepository.</li>
+	<li>Produsul are nume valid și rețetă validă, dar prețul este 0.0.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30375"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-105: ProductService File Repository Integration Test - Add product with already used recipe&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că un produs nou nu poate fi salvat dacă folosește o rețetă deja folosită de alt produs existent &icirc;n repository.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>Există fișiere temporare pentru produse și rețete.</li>
+	<li>FileProductRepository și FileRetetaRepository sunt inițializate.</li>
+	<li>Există o rețetă mock cu ID-ul 555.</li>
+	<li>Există un produs existent cu ID-ul 1, care folosește rețeta 555.</li>
+	<li>Produsul existent este deja salvat &icirc;n FileProductRepository.</li>
+	<li>Rețeta este salvată &icirc;n FileRetetaRepository.</li>
+	<li>Există un produs nou cu ID-ul 2, care folosește aceeași rețetă.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30377"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-106: ProductService Full Integration Test - Add valid product&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că un produs valid, construit ca entitate reală, este validat, salvat &icirc;n repository-ul pe fișiere și poate fi regăsit ulterior cu toate datele corecte.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>Există fișiere temporare pentru produse și rețete: products.txt și retete.txt.</li>
+	<li>FileProductRepository este inițializat cu fișierul temporar de produse.</li>
+	<li>FileRetetaRepository este inițializat cu fișierul temporar de rețete.</li>
+	<li>ProductValidator este inițializat cu repository-urile reale pe fișiere.</li>
+	<li>ProductService este inițializat cu FileProductRepository și ProductValidator.</li>
+	<li>Există o rețetă reală validă salvată &icirc;n repository-ul de rețete.</li>
+	<li>Există un produs real valid care folosește rețeta respectivă.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30379"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-107: ProductService Full Integration Test - Add null product&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că metoda addProduct() aruncă ValidationException atunci c&acirc;nd produsul primit este null.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>Există fișiere temporare pentru produse și rețete.</li>
+	<li>FileProductRepository și FileRetetaRepository sunt inițializate.</li>
+	<li>ProductValidator este inițializat cu repository-urile reale.</li>
+	<li>ProductService este inițializat cu FileProductRepository și ProductValidator.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30381"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-108: ProductService Full Integration Test - Add product with null name&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că un produs real cu nume null este respins de validator.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>Există fișiere temporare pentru produse și rețete.</li>
+	<li>FileProductRepository și FileRetetaRepository sunt inițializate.</li>
+	<li>Există o rețetă reală cu ID-ul 201, salvată &icirc;n retetaRepo.</li>
+	<li>Există un produs real cu preț valid și rețetă validă, dar cu nume null.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30383"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-109: ProductService Full Integration Test - Add product with long name&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că un produs real cu nume mai lung de 255 de caractere este respins de validator.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>Există fișiere temporare pentru produse și rețete.</li>
+	<li>FileProductRepository și FileRetetaRepository sunt inițializate.</li>
+	<li>Există o rețetă reală cu ID-ul 202, salvată &icirc;n retetaRepo.</li>
+	<li>Există un produs real cu nume de 300 de caractere, preț valid și rețetă validă.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30385"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-110: ProductService Full Integration Test - Add product with zero price&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că un produs real cu prețul 0.0 este respins de validator.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>Există fișiere temporare pentru produse și rețete.</li>
+	<li>FileProductRepository și FileRetetaRepository sunt inițializate.</li>
+	<li>Există o rețetă reală cu ID-ul 203, salvată &icirc;n retetaRepo.</li>
+	<li>Există un produs real cu nume valid, preț 0.0 și rețetă validă.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+<a name="toc_tc30387"></a><p>&nbsp;</p><div> <table class="tc" width="90%" ><tr><th colspan="4">Test Case P233-111: ProductService Full Integration Test - Add product with already used recipe&nbsp;<span style="font-size: 80%;">[Version  : 1]</span></th></tr>
+<tr><td width="20%" valign="top"><span class="label">Author:</span></td><td colspan="3">gdir3532</td></tr>
+<tr><td colspan="4"><span class="label">Summary:</span><br /><p>Verifică faptul că un produs real nu poate fi salvat dacă folosește o rețetă deja utilizată de alt produs existent &icirc;n repository.</p>
+</td></tr><tr><td colspan="4"><span class="label">Preconditions:</span><br /><ul>
+	<li>Există fișiere temporare pentru produse și rețete.</li>
+	<li>FileProductRepository și FileRetetaRepository sunt inițializate.</li>
+	<li>Există o rețetă reală cu ID-ul 301, salvată &icirc;n retetaRepo.</li>
+	<li>Există un produs real existent cu ID-ul 10, care folosește rețeta 301.</li>
+	<li>Produsul existent este salvat &icirc;n productRepo.</li>
+	<li>Există un produs real nou cu ID-ul 11, care folosește aceeași rețetă.</li>
+</ul>
+</td></tr><tr><td width="20%" valign="top"><span class="label">Execution type:</span></td><td colspan="3">Automated</td></tr>
+<tr><td width="20%" valign="top"><span class="label">Estimated exec. duration (min):</span></td><td colspan="3"></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Importance:</span></td><td colspan="3">Medium</td></tr>
+<tr><td colspan="4"></td></tr><tr><td > name of the autotest class:</td><td  colspan = "3" ></td></tr>
+<tr><td > name of the test method:</td><td  colspan = "3" ></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Requirements</span><td colspan="3">gdir3532_F01:  AdaugareProdus [Version : 1]<br /></td></tr>
+<tr><td width="20%" valign="top"><span class="label">Keywords:</span></td><td colspan="3">&nbsp;None<br/></td></tr>
+</table>
+</div>
+
+</body>
+</html>

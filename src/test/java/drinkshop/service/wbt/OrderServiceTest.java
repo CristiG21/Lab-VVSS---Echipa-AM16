@@ -1,7 +1,9 @@
-package drinkshop.service;
+package drinkshop.service.wbt;
 
 import drinkshop.domain.*;
 import drinkshop.repository.Repository;
+import drinkshop.service.OrderService;
+import drinkshop.service.StocService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
