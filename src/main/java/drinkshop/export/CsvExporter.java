@@ -8,7 +8,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CsvExporter {
     public static void exportOrders(List<Product> products, List<Order> orders, String path) {
@@ -19,7 +21,7 @@ public class CsvExporter {
             double sum = 0.0;
             for (Order o : orders) {
                 for (OrderItem i : o.getItems()) {
-                    Product p = products.stream().filter(p1 -> i.getProduct().getId() == p1.getId()).toList().get(0);
+                    Product p = products.stream().filter(p1 -> i.getProduct().getId() == p1.getId()).collect(Collectors.toList()).get(0);
 
                     // Corecție C07: Încadrarea textului (nume produs) între ghilimele
                     w.write(o.getId() + ",\"" + p.getNume() + "\"," + i.getQuantity() + "," + i.getTotal() + "\n");

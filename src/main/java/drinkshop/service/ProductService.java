@@ -52,7 +52,7 @@ public class ProductService {
         if (categorie == CategorieBautura.ALL) return getAllProducts();
         return getAllProducts().stream()
                 .filter(p -> p.getCategorie() == categorie)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public List<Product> filterByTip(TipBautura tip) {
