@@ -13,8 +13,9 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.release>17</maven.compiler.release>
-    <javafx.version>21</javafx.version>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+    <javafx.version>11.0.2</javafx.version>
     <junit.version>5.11.0</junit.version>
     <maven.surefire.version>3.3.0</maven.surefire.version>
   </properties>
@@ -99,7 +100,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.13.0</version>
         <configuration>
-          <release>17</release>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
         </configuration>
       </plugin>
 
